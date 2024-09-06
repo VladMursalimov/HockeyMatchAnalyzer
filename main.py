@@ -9,18 +9,21 @@ import detectTactics
 def main():
     # Парсер аргументов командной строки
     parser = argparse.ArgumentParser(description='Process video and annotations.')
-    parser.add_argument('--modelPath', type=str, required=True, help='Path to the YOLO model .pt')
+    parser.add_argument('--modelPathPlayers', type=str, required=True, help='Path to the YOLO model .pt')
+    parser.add_argument('--modelPathField', type=str, required=True, help='Path to the YOLO model .pt')
+
     parser.add_argument('--videoPath', type=str, required=True, help='Path to the video file .mp4')
     #parser.add_argument('--type', type=int, required=True, help='type 0 for players, type 1 is fields')
 
     # Чтение аргументов
     args = parser.parse_args()
     #type = args.type
-    modelPath = args.modelPath
+    modelPathPlayers = args.modelPathPlayers
+    modelPathField = args.modelPathField
     videoPath = args.videoPath
 
-    output_dir = annotation_field(modelPath, videoPath, '0')
-    output_dir_field = annotation_field(modelPath, videoPath, '1')
+    output_dir = annotation_field(modelPathPlayers, videoPath, '0')
+    output_dir_field = annotation_field(modelPathField, videoPath, '1')
 
     labels_dir_players = "labels_" + videoPath.replace('.mp4', '') + '_players'
     labels_dir_field = "labels_" + videoPath.replace('.mp4', '') + '_field'
